@@ -1,0 +1,54 @@
+STEP #1: If you don't already have Node.js installed, you must install it. Node.js includes npm (node package manager) and npx (node package runner). We'll use Node.js to set up the default react app environment.
+
+STEP #2: Open terminal and navigate to the folder you'd like the app to be in locally on your machine. Then run the command: "npx create-react-app my-app"
+
+This will generate the initial project structure and dependencies.
+
+STEP #3: use the command "cd my-app" in the terminal to navigate inside of the project folder you just created and in the terminal write "npm start". This will launch the default web app. This is mainly to make sure the previous steps have been done and no weird errors or freaky shit has happened.
+
+STEP #4: On our team github, there are 2 folders: php and src. You will need both of them for the app to work correctly. Download the code in the repo as a ZIP and extract it. 
+
+STEP #5: In the my-app folder after you ran npx create-react-app, it will have generated a src folder automatically. Delete this src folder and replace it with the one you downloaded from the github. Also place the extracted php folder into your my-app folder.
+
+Your folder hierarchy should look something like:
+-my-app
+	-node_modules
+	-php
+	-public
+	-src
+	.gitignore
+	package-lock.json
+	package.json
+	README.md
+
+where the src and php folders are the ones you inserted from the extracted zip of our github repo.
+
+STEP #6: Navigate to the my-app folder within terminal and run the command "npm start" to see the app hosted locally. An important note:  while having the app run locally like this is a great way to check real time for cosmetic changes made to the components, PHP files will NOT function outside of the codd server. If you want to test changes made to PHP files or if you want to test login/registration/user specific account functions, you will need to host the files on the codd server. The steps after this point will be for uploading your files to the codd server.
+
+
+UPLOADING TO CODD SERVER:
+STEP #1: I use Filezilla to transfer files to the codd server so I will write these instructions from that perspective. If you do not have filezilla downloaded, download it on your device. All GSU students have their personal domain on the codd server that you can access on filezilla using this information:
+Host: codd.cs.gsu.edu
+Username: your gsu email ending in student.gsu.edu
+Password: type your actual GSU password
+Port: 22
+
+STEP #2:
+Once connected you will probably see some .bash files, ignore them, we don't need them. If you do not see a folder called "public_html", create one in your gsuid folder. You can do this by right clicking inside of filezilla and selecting "Create directory". Be sure to name it "public_html".
+
+STEP #3: 
+Back in the terminal, navigate to your my-app folder where the app is located and type "npm run build"
+
+This will create a build folder with a smaller compressed version of the web app that we will host on the codd server.
+
+STEP #4: Inside of the build folder, you will want to change the index.html file slightly. Because codd server is a big dummy sometimes, it will not read paths the same way other hosts do. To make sure the components show up as intended, inside index.html wherever there is a href tag (wherever you see a file path being referenced) remove the beginning "/" from the path. This must be done for all href tags within index.html to work properly.
+
+STEP #5: Now we will want to make a couple minor changes to the php files in order for them to work properly on codd. Since every student has their own mySQL database on codd, you'll have to set up the files to lead to your database instead of mine. Otherwise you'll get a permissions error.
+
+At the top of all php files you'll see 4 lines of code defining the DB_NAME, DB_USER, DB_PASSWORD, and DB_HOST. All you need to do is change DB_NAME,DB_USER, and DB_PASSWORD to your gsu id. leave DB_HOST the same. 
+
+STEP #6: In Filezilla, drag the entire build folder into your public_html folder. Then drag the php folder inside that build folder. Once, this is done, give the codd server a few minutes to update, and you should see the newly updated react app at the url:
+
+codd.cs.gsu.edu/~yourgsuID/build/index.html
+
+
