@@ -1,0 +1,25 @@
+/* LoginForm.css */
+.sidebar {
+    width: 22%; /* Adjust the width to your preference */
+    height: 40%; /* Set the height to match the width for a square shape */
+    background-color: #f0f0f0; /* Background color for the form */
+    border: 1px solid #ccc; /* Add a border for styling */
+    padding: 10px; /* Add some padding inside the form */
+    float: right;
+}
+
+.button-container {
+    display: flex; /* Display the buttons in a flex container */
+    justify-content: space-between; /* Spread the buttons apart */
+    margin-top: 10px; /* Add some top margin for spacing */
+}
+
+.form-group {
+    margin-bottom: 10px; /* Add space between form groups */
+}
+  
+.form-group label {
+    display: block; /* Display the label as a block element */
+    margin-bottom: 5px; /* Add space between the label and the input */
+}
+
