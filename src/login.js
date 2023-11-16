@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
 import './login.css'; // Import your CSS file
+import Cookies from 'js-cookie';
+
+function checkAccountTypeStatus() {
+  const accountTypeCookie = Cookies.get('accountType');
+  return accountTypeCookie;
+}
+
 
 function AuthForm() {
   const [email, setEmail] = useState('');
@@ -8,6 +15,7 @@ function AuthForm() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [accountType, setAccountType] = useState('');
   const [isLoginForm, setIsLoginForm] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Track login status
 
   const accountTypeOptions = ['Presenter', 'Admin', 'Judge']; // Define account type options
 
@@ -29,6 +37,8 @@ function AuthForm() {
           const data = await response.text(); // Get the response body as text
           setResponseMessage(data);
           alert(data); // You can replace this with any other UI update logic
+          setIsLoggedIn(true);
+          
         } else {
            // Handle login failure, e.g., display an error message
           setResponseMessage('Login failed. Please try again.');
@@ -43,9 +53,9 @@ function AuthForm() {
         (accountType === 'Admin' && !email.endsWith('@gsu.edu')) ||
         (accountType === 'Presenter' && !email.endsWith('@student.gsu.edu'))
       ) {
-        if (accountType === 'judge' || accountType === 'admin') {
+        if (accountType === 'Judge' || accountType === 'Admin') {
           alert('This account type must register with a @gsu.edu email');
-        } else if (accountType === 'presenter') {
+        } else if (accountType === 'Presenter') {
           alert('This account type must register with a @student.gsu.edu email');
         }
       }else{
@@ -77,8 +87,30 @@ function AuthForm() {
     
   };
 
+  const handleLogout = () => {
+    // Handle logout logic here
+  
+        setIsLoggedIn(false);
+        setEmail('');
+        setPassword('');
+        setConfirmPassword('');
+        setAccountType('');
+        setResponseMessage('');
+
+        Cookies.remove('isLoggedIn');
+        Cookies.remove('accountType');
+    
+
+  };
+
   return (
     <div className='sidebar'>
+      { isLoggedIn ? (
+         <div className="logged-in-state">
+         <p>Currently logged in as: {email}</p>
+         <button onClick={handleLogout}>Sign Out</button>
+         </div>
+      ) : ( 
     <div className="auth-form">
       <h2>{isLoginForm ? 'Login' : 'Register'}</h2>
       <form>
@@ -142,7 +174,7 @@ function AuthForm() {
         <div className="response-message">{responseMessage}</div>
       )}
     </div>
-      
+      )}
        <nav>
          <ul>
            <li><a href="/">Home</a></li>
