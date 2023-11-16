@@ -4,11 +4,13 @@ STEP #2: Open terminal and navigate to the folder you'd like the app to be in lo
 
 This will generate the initial project structure and dependencies.
 
-STEP #4: use the command: "npm install react-router-dom" to install react router, which allows the app to route to different page views based on user interaction.
+STEP #3: Use the command "cd my-app" in the terminal to navigate inside of the project folder you just created.
 
-STEP #5: use the command: "npm install js-cookies" to install js-cookies, which will allow our front end to change UI based on the cookies session information on the back end.
+STEP #4: Use the command: "npm install react-router-dom" to install react router, which allows the app to route to different page views based on user interaction.
 
-STEP #6: use the command "cd my-app" in the terminal to navigate inside of the project folder you just created and in the terminal write "npm start". This will launch the default web app. This is mainly to make sure the previous steps have been done and no weird errors or freaky shit has happened.
+STEP #5: Use the command: "npm install js-cookies" to install js-cookies, which will allow our front end to change UI based on the cookies session information on the back end.
+
+STEP #6: In the terminal write "npm start". This will launch the default web app. This is mainly to make sure the previous steps have been done and no weird errors or freaky shit has happened.
 
 STEP #7: On our team github, there are 2 folders: php and src. You will need both of them for the app to work correctly. Either download the code in the repo as a ZIP and extract it, or selectively clone the repo.
 
