@@ -38,6 +38,17 @@ function AuthForm() {
       }
     }else{
       // Handle registration
+      if (
+        (accountType === 'Judge' && !email.endsWith('@gsu.edu')) ||
+        (accountType === 'Admin' && !email.endsWith('@gsu.edu')) ||
+        (accountType === 'Presenter' && !email.endsWith('@student.gsu.edu'))
+      ) {
+        if (accountType === 'judge' || accountType === 'admin') {
+          alert('This account type must register with a @gsu.edu email');
+        } else if (accountType === 'presenter') {
+          alert('This account type must register with a @student.gsu.edu email');
+        }
+      }else{
       if (password === confirmPassword) {
         const formData = new FormData();
         formData.append('email', email);
@@ -61,6 +72,7 @@ function AuthForm() {
       } else {
         setResponseMessage('Passwords do not match.'); // Handle password mismatch
       }
+    }
     }
     
   };
