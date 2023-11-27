@@ -5,20 +5,25 @@ function Dashboard() {
     const [events, setEvents] = useState([]);
 
     useEffect(() => {
-        fetch('./eventhandling.php')
-            .then(response => response.json())
-            .then(data => {
-                if (data === 'No events') {
-                    // Handle case where no events exist
-                    console.log('No events');
-                } else {
-                    // Set events in state to display
-                    setEvents(data);
-                }
-            })
-            .catch(error => {
-                console.error('Error fetching events:', error);
-            });
+        fetch('php/eventhandling.php')
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.length === 0) {
+                // Handle case where no events exist
+                console.log('No events');
+            } else {
+                // Set events in state to display
+                setEvents(data);
+            }
+        })
+        .catch(error => {
+            console.error('Error fetching events:', error);
+        });
     }, []);
 
     // Render events or "No events" message in your component

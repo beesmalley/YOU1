@@ -1,23 +1,24 @@
 <?php
 // Connect to the database
-define('DB_NAME', 'ssmalley1');
-define('DB_USER', 'ssmalley1');
-define('DB_PASSWORD', 'ssmalley1');
+define('DB_NAME', 'GSUPoster');
+define('DB_USER', 'root');
+define('DB_PASSWORD', '');
 define('DB_HOST', 'localhost');
 
 $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-
-// Check if the properties table exists
-$sql = "SELECT 1 FROM users LIMIT 1";
-$result = mysqli_query($conn, $sql);
 
 // Check the connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-if (!$result) {
-    $createTableQuery = "CREATE TABLE IF NOT EXISTS users (
+// Check if the events table exists
+$table_name = "users"; // Your events table name
+$table_exists_query = "SHOW TABLES LIKE '$table_name'";
+$table_exists_result = $conn->query($table_exists_query);
+
+if ($table_exists_result->num_rows == 0) {
+    $create_table_query = "CREATE TABLE $table_name (
         id INT AUTO_INCREMENT PRIMARY KEY,
         account_type VARCHAR(255) NOT NULL,
         first_name VARCHAR(255),
@@ -25,7 +26,11 @@ if (!$result) {
         email VARCHAR(255),
         password VARCHAR(255)
     )";
-    mysqli_query($conn, $createTableQuery);
+    if ($conn->query($create_table_query) === TRUE) {
+        echo "Table created successfully";
+    } else {
+        echo "Error creating table: " . $conn->error;
+    }
 }
 
 // Handle user registration
