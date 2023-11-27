@@ -2,12 +2,9 @@ import React, { useState } from 'react';
 import './login.css'; // Import your CSS file
 import Cookies from 'js-cookie';
 
-function checkAccountTypeStatus() {
-  const accountTypeCookie = Cookies.get('accountType');
-  return accountTypeCookie;
+function checkAccountTypeStatus(){
+  return Cookies.get("accountType");
 }
-
-
 function AuthForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -27,6 +24,7 @@ function AuthForm() {
       const formData = new FormData();
       formData.append('email', email);
       formData.append('password', password);
+      formData.append('account_type',accountType);
       
   
       try {
@@ -67,7 +65,12 @@ function AuthForm() {
         formData.append('password', password);
         formData.append('account_type', accountType); // Add account type to the form data
         formData.append('first_name',firstname);
-        formData.append('last_name',lastname)
+        formData.append('last_name',lastname);
+
+        if (!accountType) {
+          setResponseMessage('Please select an Account Type');
+          return;
+        }
 
         try {
           const response = await fetch('php/registrationsubmit.php', {
@@ -161,7 +164,6 @@ function AuthForm() {
               onChange={(e) => setLastname(e.target.value)}
               />
           </div>
-          
         )}
          {!isLoginForm && (
           <div>
@@ -197,14 +199,12 @@ function AuthForm() {
        <nav>
          <ul>
            <li><a href="/">Home</a></li>
-           {accountType === 'admin' && (
+           {checkAccountTypeStatus() === 'Admin' && (
              <li><a href="/admin">Admin Dashboard</a></li>
            )}
-           {accountType === 'user' && (
-             <li><a href="/user">User Dashboard</a></li>
+           {checkAccountTypeStatus() === 'Presenter' || checkAccountTypeStatus() === 'Judge' && (
+            <li><a href="./userDashboard">User Dashboard</a></li>
            )}
-           <li><a href="/about">About</a></li>
-           <li><a href="/contact">Contact</a></li>
          </ul>
        </nav>
        <div className='calendar'>

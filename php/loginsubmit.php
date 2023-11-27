@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Password is correct, log in the user
             echo "Login successful!"; // You can customize this response
             setcookie("isLoggedIn", "true", time() + 86400);
-            setcookie("accountType",$row["accountType"], time() + 86400);
+            setcookie("accountType",$row["account_type"], time() + 86400);
             // Store user session or token for authentication
             // Example: $_SESSION["user_id"] = $row["id"];
         } else {
