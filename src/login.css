@@ -1,11 +1,12 @@
 /* LoginForm.css */
 .sidebar {
     width: 22%; /* Adjust the width to your preference */
-    height: 40%; /* Set the height to match the width for a square shape */
     background-color: #f0f0f0; /* Background color for the form */
     border: 1px solid #ccc; /* Add a border for styling */
     padding: 10px; /* Add some padding inside the form */
     float: right;
+    text-align: left;
+    z-index:1;
 }
 
 .button-container {
@@ -22,4 +23,6 @@
     display: block; /* Display the label as a block element */
     margin-bottom: 5px; /* Add space between the label and the input */
 }
+
+
 

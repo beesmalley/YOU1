@@ -15,10 +15,14 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  height: 100px;
 }
 .content {
   background-color: #61dafb;
   padding:5px;
+  display: flex;
+  width:100vw;
+  height:calc(100vh - 100px);
 }
 .footer {
   background-color: aquamarine;
@@ -26,4 +30,5 @@
 .App-link {
   color: #61dafb;
 }
+
 

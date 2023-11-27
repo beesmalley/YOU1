@@ -1,9 +1,9 @@
 <?php
 // Connect to the database
 // Connect to the database
-define('DB_NAME', 'ssmalley1');
-define('DB_USER', 'ssmalley1');
-define('DB_PASSWORD', 'ssmalley1');
+define('DB_NAME', 'GSUPoster');
+define('DB_USER', 'root');
+define('DB_PASSWORD', '');
 define('DB_HOST', 'localhost');
 
 $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
@@ -28,7 +28,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $row["password"])) {
             // Password is correct, log in the user
             echo "Login successful!"; // You can customize this response
-
+            setcookie("isLoggedIn", "true", time() + 86400);
+            setcookie("accountType",$row["accountType"], time() + 86400);
             // Store user session or token for authentication
             // Example: $_SESSION["user_id"] = $row["id"];
         } else {
