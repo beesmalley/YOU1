@@ -1,0 +1,31 @@
+.user-dashboard {
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .user-dashboard h1 {
+    color: #333;
+    font-size: 24px;
+  }
+  
+  .user-dashboard h2 {
+    color: #555;
+    font-size: 20px;
+  }
+  
+  .user-dashboard a {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .user-dashboard a:hover {
+    background-color: #0056b3;
+  }
+  
