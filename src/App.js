@@ -1,8 +1,8 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Home from './Home';
-import AuthForm from './sidebar';
+import Sidebar from './sidebar';
 import UserDashboard from './userDashboard';
 
 function App() {
@@ -13,15 +13,9 @@ function App() {
         <header className="banner">
           <h1>GSU Poster Voting</h1>
         </header>
-        
-        {/* Navigation Links */}
-        <nav>
-          <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/user-dashboard">User Dashboard</Link></li>
-            {/* Add other links as needed */}
-          </ul>
-        </nav>
+
+        {/* Sidebar */}
+        <Sidebar />
 
         {/* Main Content */}
         <main className="content">
@@ -32,19 +26,12 @@ function App() {
             <Route path="/user-dashboard">
               <UserDashboard />
             </Route>
+            {/* Add other routes as needed */}
           </Switch>
-          <AuthForm />
         </main>
 
-        {/* Footer with Static Links */}
-        <footer className="footer">
-          <div className="footer-links">
-            <Link to="/about">About</Link>
-            <Link to="/contact">Contact</Link>
-            <Link to="/terms">Terms of Service</Link>
-            <Link to="/privacy">Privacy Policy</Link>
-          </div>
-        </footer>
+        {/* Footer */}
+        {/* ... Footer code ... */}
       </div>
     </Router>
   );
