@@ -1,0 +1,60 @@
+.poster-upload-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0; /* Light gray background */
+}
+
+.poster-upload-form {
+    width: 80%;
+    max-width: 600px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: auto;
+}
+
+.poster-upload-form label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333; /* Dark gray color */
+}
+
+.poster-upload-form input[type="text"],
+.poster-upload-form select,
+.poster-upload-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* So that padding doesn't increase the width */
+}
+
+.poster-upload-form input[type="file"] {
+    margin-bottom: 20px;
+}
+
+.poster-upload-form button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.poster-upload-form button:hover {
+    background-color: #0056b3;
+}
+
+.poster-upload-form button[type="submit"] {
+    background-color: #28a745;
+}
+
+.poster-upload-form button[type="submit"]:hover {
+    background-color: #218838;
+}
