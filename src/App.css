@@ -1,34 +1,53 @@
 .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+  display: flex;
+  flex-direction: column; /* Stack children vertically */
+  min-height: 100vh; /* Ensure the app takes up full viewport height */
+  text-align: left; /* Align text to the start, which is typically left */
 }
 
 .banner {
   background-color: #282c34;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-  height: 100px;
+  height: 100px; /* Height of the banner */
+  width: 100%; /* Make sure the banner stretches across the full width */
 }
-.content {
-  background-color: #61dafb;
-  padding:5px;
+
+/* The main wrapper for content and sidebar */
+.main-wrapper {
   display: flex;
-  width:100vw;
-  height:calc(100vh - 100px);
+  flex-grow: 1; /* Grow to take up all remaining space */
 }
+
+.sidebar {
+  background-color: #f0f0f0; /* The gray color for sidebar */
+  width: 250px; /* Width of the sidebar */
+  height: auto; /* Let the height be determined by its content */
+  flex-shrink: 0; /* Prevent the sidebar from shrinking */
+  /* Stick to the right */
+  margin-left: auto;
+}
+
+.content {
+  background-color: #61dafb; /* The blue color for content area */
+  flex-grow: 1; /* Allow content area to take up the remaining space */
+  height: calc(100vh - 100px); /* Subtract the banner height */
+  overflow-y: auto; /* Add scroll to the content area if content overflows */
+}
+
+/* Assuming this is the purple title part of the content area */
+.title {
+  background-color: #a020f0; /* The purple color */
+  /* Add more styles for the title section if needed */
+}
+
 .footer {
   background-color: aquamarine;
+  width: 100%; /* Stretch footer across the full width */
+  /* Footer styling */
 }
+
 .App-link {
   color: #61dafb;
+  /* Link styling */
 }
-
-
