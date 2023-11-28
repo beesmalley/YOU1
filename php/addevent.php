@@ -17,6 +17,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["name"];
     $description = $_POST["description"];
     $thumbnail = $_FILES["thumbnail"];
+    $is_open = $_POST["isOpen"] === 'true' ? 1 : 0; // Convert string to integer
+    $openDate = $_POST["openDate"];
+
 
     // Handle the uploaded image
     $thumbnailPath = ''; // Initialize the variable to store the image path in the database
@@ -49,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Insert the event information into the events table
-    $insertQuery = "INSERT INTO events (Name, Description, Thumbnail) VALUES ('$name', '$description', '$thumbnailPath')";
+    $insertQuery = "INSERT INTO events (Name, Description, Thumbnail, isOpen, openDate) VALUES ('$name', '$description', '$thumbnailPath','$is_open','$openDate')";
 
     if ($conn->query($insertQuery) === TRUE) {
         echo "Event added successfully";

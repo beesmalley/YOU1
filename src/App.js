@@ -5,6 +5,8 @@ import Home from './Home';
 import Sidebar from './sidebar';
 import UserDashboard from './userDashboard';
 import EventForm from './eventForm';
+import PosterUploadForm from './posterForm';
+import JudgeForm from './judgeForm';
 import Cookies from 'js-cookie';
 
 function App() {
@@ -37,6 +39,8 @@ function App() {
               <Route path="/GSUPoster/index.html" element={<Home />} />
               <Route path="/userDashboard" element={<UserDashboard />} />
               <Route path="/eventForm" element={<EventForm/>} />
+              <Route path="/posterForm" element={<PosterUploadForm/>} />
+              <Route path="/judgeForm" element={<JudgeForm/>} />
               {/* Add other routes as needed */}
             </Routes>
           </main>
