@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import './Dashboard.css';
+import './Home.css';
 
-function Dashboard() {
+function Home() {
     const [events, setEvents] = useState([]);
 
     useEffect(() => {
@@ -28,7 +28,7 @@ function Dashboard() {
 
     // Render events or "No events" message in your component
     return (
-        <div className='dashboard'>
+        <div className='home'>
             <h2>Upcoming Events</h2>
             <hr></hr>
             {events.length > 0 ? (
@@ -48,4 +48,4 @@ function Dashboard() {
     );
 }
 
-export default Dashboard;
+export default Home;

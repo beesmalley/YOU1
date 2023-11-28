@@ -1,6 +1,7 @@
 import './App.css';
-import Dashboard from './Dashboard';
-import AuthForm from './login';
+import Home from './Home';
+import AuthForm from './sidebar';
+
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
     
     {/* Main Content */}
     <main className="content">
-      <Dashboard />
+      <Home />
       <AuthForm/>
     </main>
 
