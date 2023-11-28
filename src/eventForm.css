@@ -1,5 +1,49 @@
-.eventform{
-    background-color: blanchedalmond;
-    display: block; /* Display the label as a block element */
-    margin-bottom: 5px; /* Add space between the label and the input */
+.event-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0; /* Light gray background */
+}
+
+.event-form {
+    width: 80%;
+    max-width: 600px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: auto;
+}
+
+.event-form label {
+    display: block;
+    margin-bottom: 10px;
+    color: #333; /* Dark gray color */
+}
+
+.event-form input[type="text"],
+.event-form input[type="date"],
+.event-form select,
+.event-form input[type="file"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box; /* So that padding doesn't increase the width */
+}
+
+.event-form button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.event-form button:hover {
+    background-color: #218838;
 }
