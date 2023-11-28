@@ -114,7 +114,7 @@ const UserDashboard = () => {
     <div>
       <h2>My Events</h2>
       {renderEventsList()}
-      <Link to="/posterForm">Upload Poster</Link>
+      <Link to="./posterForm">Upload Poster</Link>
     </div>
   );
 
