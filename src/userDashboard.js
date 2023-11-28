@@ -7,6 +7,7 @@ const UserDashboard = () => {
   const [events, setEvents] = useState([]);
   const [judgeEvents, setJudgeEvents] = useState([]);
   const [postersToJudge, setPostersToJudge] = useState([]);
+  const [myPosters, setMyPosters] = useState([]);
 
   useEffect(() => {
     setUserType(Cookies.get('accountType'));
@@ -66,6 +67,29 @@ const UserDashboard = () => {
     setPostersToJudge(prev => prev.filter(poster => poster.ID !== posterId));
   };
 
+  // Function to delete a poster
+  const deletePoster = async (posterId) => {
+    try {
+      const response = await fetch('./posterInfo.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'delete', posterId })
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      console.log('Delete Success:', result);
+
+      // Update the myPosters state to remove the deleted poster
+      setMyPosters(prevPosters => prevPosters.filter(poster => poster.ID !== posterId));
+    } catch (error) {
+      console.error('Error deleting poster:', error);
+    }
+  };
+
   //TODO: create render events list for Presenter user type
   const renderEventsList = () => (
     <ul>
@@ -110,11 +134,31 @@ const UserDashboard = () => {
     </ul>
   );
 
+  const renderMyPosters = () => {
+    if (myPosters.length === 0) {
+      return <p>No posters uploaded yet.</p>;
+    }
+    return (
+      <ul>
+        {myPosters.map(poster => (
+          <li key={poster.ID}>
+            <h3>{poster.Title}</h3>
+            <p>{poster.Description}</p>
+            {/* Add delete button here */}
+            <button onClick={() => deletePoster(poster.ID)}>Delete Poster</button>
+          </li>
+        ))}
+      </ul>
+    );
+  };
+
   const renderPresenterDashboard = () => (
     <div>
-      <h2>My Events</h2>
+      <h2>Events</h2>
       {renderEventsList()}
-      <Link to="./posterForm">Upload Poster</Link>
+      <Link to="/posterForm">Upload Poster</Link>
+      <h2>My Posters</h2>
+      {renderMyPosters()}
     </div>
   );
 
