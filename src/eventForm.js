@@ -11,6 +11,11 @@ const [thumbnail, setThumbnail] = useState(null);
 const [isOpen, setIsOpen] = useState(null);
 const [openDate,setOpenDate] = useState(null);
 
+const openOptions = [
+  { label: 'Open', value: 'true' },
+  { label: 'Closed', value: 'false' },
+];
+
 const handleSubmit = async (e) => {
   e.preventDefault();
 
@@ -19,7 +24,8 @@ const handleSubmit = async (e) => {
     formData.append('name', name);
     formData.append('description', description);
     formData.append('thumbnail', thumbnail);
-    formData.append('isOpen',)
+    formData.append('isOpen', isOpen === 'true' ? '1' : '0'); // Convert string value to 1 or 0
+    formData.append('openDate',openDate);
 
     const response = await fetch('./GSUposter/php/addevent.php', {
       method: 'POST',
@@ -64,12 +70,18 @@ return (
         accept=".png, .jpg, .jpeg" // Specify accepted file types
         onChange={handleFileChange}
       />
-       <label htmlFor="isOpen">Event Status:</label>
-      <select id="isOpen" onChange={(e) => setIsOpen(e.target.value)}>
-        <option value="true">Open</option>
-        <option value="false">Closed</option>
+       <select
+        id="isOpen"
+        value={isOpen}
+        onChange={(e) => setIsOpen(e.target.value)}
+      >
+        <option value="">Select Open Status</option>
+        {openOptions.map((option) => (
+          <option key={option.value} value={option.value}>
+            {option.label}
+          </option>
+        ))}
       </select>
-
       <label htmlFor="openDate">Event Open Date:</label>
       <input
         type="date"

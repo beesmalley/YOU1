@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["name"];
     $description = $_POST["description"];
     $thumbnail = $_FILES["thumbnail"];
-    $is_open = $_POST["isOpen"] === 'true' ? 1 : 0; // Convert string to integer
+    $is_open = $_POST["isOpen"];
     $openDate = $_POST["openDate"];
 
 

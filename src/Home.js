@@ -35,6 +35,7 @@ function Home() {
                 events.map(event => (
                     <div key={event.ID} className='eventcard'>
                         <h2>{event.Name}</h2>
+                        <hr></hr>
                         <p>{event.Description}</p>
                         
                         {/* Display other event details */}
@@ -43,7 +44,9 @@ function Home() {
                             src={`data:image/jpeg;base64,${event.Thumbnail}`}
                             alt={`Thumbnail for ${event.Name}`}
                         />
+                        
                     )}
+                    <hr></hr>
                     </div>
                 ))
             ) : (

@@ -23,7 +23,7 @@ const UserDashboard = () => {
 
   const fetchEvents = async () => {
     try {
-      const response = await fetch('./eventhandling.php');
+      const response = await fetch('GSUPoster/php/eventhandling.php');
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }

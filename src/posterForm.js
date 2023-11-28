@@ -15,7 +15,7 @@ const PosterUploadForm = () => {
 
     useEffect(() => {
         // Fetch events from the backend
-        fetch('./handling.php')
+        fetch('GSUPoster/php/eventhandling.php')
             .then(response => response.json())
             .then(data => setEvents(data))
             .catch(error => console.error('Error:', error));
