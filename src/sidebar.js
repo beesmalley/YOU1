@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 import {Link} from 'react-router-dom';
 
 
-function AuthForm() {
+function Sidebar() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [responseMessage, setResponseMessage] = useState('');
@@ -35,7 +35,7 @@ function AuthForm() {
       formData.append('password', password);
       
       try {
-        const response = await fetch('php/loginsubmit.php', {
+        const response = await fetch('./php/loginsubmit.php', {
           method: 'POST',
           body: formData,
         });
@@ -75,7 +75,7 @@ function AuthForm() {
         formData.append('last_name',lastname)
 
         try {
-          const response = await fetch('php/registrationsubmit.php', {
+          const response = await fetch('./php/registrationsubmit.php', {
             method: 'POST',
             body: formData,
           });
@@ -201,7 +201,7 @@ function AuthForm() {
       )}
        <nav>
          <ul>
-           <li><a href="index.html">Home</a></li>
+           <li><Link to="/GSUPoster/index.html">Home</Link></li>
            {(accountType === 'Presenter' || accountType === 'Judge' || accountType === 'Admin') && (
              <li><Link to="./userDashboard">User Dashboard</Link></li>
            )}
@@ -217,4 +217,4 @@ function AuthForm() {
   );
 }
 
-export default AuthForm;
+export default Sidebar;
