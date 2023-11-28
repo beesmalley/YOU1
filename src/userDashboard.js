@@ -81,11 +81,20 @@ const UserDashboard = () => {
     </div>
   );
 
+  const renderAdminDashboard = () => (
+    <div>
+      <h2>My Events</h2>
+      {renderEventsList()}
+      <Link to="/eventForm">Create Event</Link>
+    </div>
+  );
+
   return (
     <div className="user-dashboard">
       <h1>User Dashboard</h1>
       {userType === 'Presenter' && renderPresenterDashboard()}
       {userType === 'Judge' && renderJudgeDashboard()}
+      {userType === 'Admin' && renderAdminDashboard()}
     </div>
   );
 };

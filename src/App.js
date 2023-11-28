@@ -20,7 +20,7 @@ function App() {
           <main className="content">
             <Routes>
               <Route path="/" element={<Home />} />
-              <Route path="/user-dashboard" element={<UserDashboard />} />
+              <Route path="/userDashboard" element={<UserDashboard />} />
               {/* Add other routes as needed */}
             </Routes>
           </main>

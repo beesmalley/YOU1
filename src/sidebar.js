@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './sidebar.css'; // Import your CSS file
 import Cookies from 'js-cookie';
+import {Link} from 'react-router-dom';
 
 
 function AuthForm() {
@@ -205,7 +206,7 @@ function AuthForm() {
              <li><a href="/admin">Admin Dashboard</a></li>
            )}
            {(accountType === 'Presenter' || accountType === 'Judge') && (
-             <li><a href="./userDashboard">User Dashboard</a></li>
+             <li><Link to="./userDashboard">User Dashboard</Link></li>
            )}
            <li><a href="/about">About</a></li>
            <li><a href="/contact">Contact</a></li>
