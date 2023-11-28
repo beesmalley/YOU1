@@ -24,7 +24,9 @@ if ($table_exists_result->num_rows == 0) {
                             Name VARCHAR(100) NOT NULL,
                             Description TEXT,
                             Thumbnail MEDIUMBLOB,
-                            Posted_Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                            Posted_Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                            IsOpen TINYINT(1) NOT NULL,
+                            OpenDate TIMESTAMP NULL DEFAULT NULL
                         )";
 
     if ($conn->query($create_table_query) === TRUE) {
@@ -33,23 +35,33 @@ if ($table_exists_result->num_rows == 0) {
         echo "Error creating table: " . $conn->error;
     }
 } else {
-    // Fetch events data from the table if it exists
-    $fetch_events_query = "SELECT * FROM $table_name";
-    $fetch_events_result = $conn->query($fetch_events_query);
+    // Fetch events from the database
+$fetch_events_query = "SELECT * FROM events WHERE IsOpen = 1"; // Modify this query as needed
+$result = $conn->query($fetch_events_query);
 
-    $events = array();
+$events = array();
 
-    if ($fetch_events_result->num_rows > 0) {
-        // Output data of each row
-        while ($row = $fetch_events_result->fetch_assoc()) {
-            $events[] = $row;
-        }
-        // Convert to JSON and send back to frontend
-        echo json_encode($events);
-    } else {
-        // If no events exist, communicate that to the frontend
-        echo json_encode([]);
+if ($result->num_rows > 0) {
+    // Fetch event details and encode the image data to base64
+    while ($row = $result->fetch_assoc()) {
+        $event = array(
+            'ID' => $row['ID'],
+            'Name' => $row['Name'],
+            'Description' => $row['Description'],
+            // Other event details...
+
+            // Fetch and encode the image data to base64
+            'Thumbnail' => base64_encode($row['Thumbnail'])
+        );
+
+        // Add the event to the events array
+        $events[] = $event;
     }
+}
+
+// Output events array as JSON
+echo json_encode($events);
+
 }
 
 $conn->close();

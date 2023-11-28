@@ -36,7 +36,14 @@ function Home() {
                     <div key={event.ID} className='eventcard'>
                         <h2>{event.Name}</h2>
                         <p>{event.Description}</p>
+                        
                         {/* Display other event details */}
+                        {event.Thumbnail && (
+                        <img
+                            src={`data:image/jpeg;base64,${event.Thumbnail}`}
+                            alt={`Thumbnail for ${event.Name}`}
+                        />
+                    )}
                     </div>
                 ))
             ) : (

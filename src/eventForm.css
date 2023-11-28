@@ -1,3 +1,5 @@
 .eventform{
     background-color: blanchedalmond;
+    display: block; /* Display the label as a block element */
+    margin-bottom: 5px; /* Add space between the label and the input */
 }
