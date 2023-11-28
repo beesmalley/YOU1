@@ -106,7 +106,6 @@ function Sidebar() {
         setConfirmPassword('');
         setAccountType('');
         setResponseMessage('');
-
         Cookies.remove('isLoggedIn');
         Cookies.remove('accountType');
     

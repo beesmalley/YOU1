@@ -30,12 +30,32 @@ if (mysqli_num_rows($table_check_result) == 0) {
                         )";
 
     if (mysqli_query($conn, $create_table_query)) {
-        echo "Table $table_name created successfully";
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $event_id = $_POST["EventID"];
+            $user_id = $_COOKIE["userID"];
+    
+            $insertQuery = "INSERT INTO User_Event (EventID, UserID) VALUES ('$event_id', '$user_id')";
+            if ($conn->query($insertQuery) === TRUE) {
+                echo "Event added successfully";
+            } else {
+                echo "Error: " . $insertQuery . "<br>" . $conn->error;
+            }
+        }
     } else {
         echo "Error creating table: " . mysqli_error($conn);
     }
 } else {
-    echo "Table $table_name already exists";
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $event_id = $_POST["EventID"];
+        $user_id = $_COOKIE["userID"];
+
+        $insertQuery = "INSERT INTO User_Event (EventID, UserID) VALUES ('$event_id', '$user_id')";
+        if ($conn->query($insertQuery) === TRUE) {
+            echo "Event added successfully";
+        } else {
+            echo "Error: " . $insertQuery . "<br>" . $conn->error;
+        }
+    }
 }
 
 mysqli_close($conn);

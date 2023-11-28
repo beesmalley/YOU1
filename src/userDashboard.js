@@ -8,15 +8,17 @@ const UserDashboard = () => {
   const [judgeEvents, setJudgeEvents] = useState([]);
   const [postersToJudge, setPostersToJudge] = useState([]);
   const [myPosters, setMyPosters] = useState([]);
+  const [myEvents, setMyEvents] = useState([]);
 
   useEffect(() => {
     setUserType(Cookies.get('accountType'));
-    fetchEvents();
-    fetchPosters();
+    // fetchEvents();
+    // fetchPosters();
     if (userType === 'Judge') {
       fetchEventsFollowedByJudge();
       fetchAssignedPosters();
     } else if(userType === 'Presenter'){
+      fetchMyEvents();
       fetchPosters();
     }else {
       //TODO: Add function here for fetchEventsFollowedByPresenter
@@ -34,6 +36,18 @@ const UserDashboard = () => {
       setEvents(data);
     } catch (error) {
       console.error('Fetching events failed:', error);
+    }
+  };
+  const fetchMyEvents = async () => {
+    try {
+      const response = await fetch('GSUPoster/php/fetchmyevents.php');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      setMyEvents(data);
+    } catch (error) {
+      console.error('Fetching myevents failed:', error);
     }
   };
 
@@ -120,7 +134,16 @@ const UserDashboard = () => {
       ))}
     </ul>
   );
-
+  const renderMyEventsList = () => (
+    <ul>
+      {myEvents.map(event => (
+        <li key={event.ID}>
+          <h3>{event.Name}</h3>
+          <p>{event.Description}</p>
+        </li>
+      ))}
+    </ul>
+  );
   const renderJudgeEventsList = () => {
     if (judgeEvents.length === 0) {
       return <p>Visit the home page to explore and follow events!</p>;
@@ -179,8 +202,8 @@ const UserDashboard = () => {
 
   const renderPresenterDashboard = () => (
     <div>
-      <h2>Events</h2>
-      {renderEventsList()}
+      <h2>My Events</h2>
+      {renderMyEventsList()}
       <Link to="/posterForm">Upload Poster</Link>
       <h2>My Posters</h2>
       {renderMyPosters()}
