@@ -1,4 +1,4 @@
-.event-form-container {
+.poster-upload-form-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,7 +6,7 @@
     background-color: #f0f0f0; /* Light gray background */
 }
 
-.event-form {
+.poster-upload-form {
     width: 80%;
     max-width: 600px;
     background-color: white;
@@ -16,16 +16,15 @@
     margin: auto;
 }
 
-.event-form label {
+.poster-upload-form label {
     display: block;
     margin-bottom: 10px;
     color: #333; /* Dark gray color */
 }
 
-.event-form input[type="text"],
-.event-form input[type="date"],
-.event-form select,
-.event-form input[type="file"] {
+.poster-upload-form input[type="text"],
+.poster-upload-form select,
+.poster-upload-form textarea {
     width: 100%;
     padding: 8px;
     margin-bottom: 20px;
@@ -34,16 +33,28 @@
     box-sizing: border-box; /* So that padding doesn't increase the width */
 }
 
-.event-form button {
-    background-color: #28a745;
+.poster-upload-form input[type="file"] {
+    margin-bottom: 20px;
+}
+
+.poster-upload-form button {
+    background-color: #007bff;
     color: white;
     border: none;
     padding: 10px 15px;
     border-radius: 4px;
     cursor: pointer;
-    width: 100%;
+    margin-right: 10px;
 }
 
-.event-form button:hover {
+.poster-upload-form button:hover {
+    background-color: #0056b3;
+}
+
+.poster-upload-form button[type="submit"] {
+    background-color: #28a745;
+}
+
+.poster-upload-form button[type="submit"]:hover {
     background-color: #218838;
 }

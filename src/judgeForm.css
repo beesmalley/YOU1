@@ -1,4 +1,4 @@
-.event-form-container {
+.judge-form-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -6,35 +6,55 @@
     background-color: #f0f0f0; /* Light gray background */
 }
 
-.event-form {
+.judge-form {
     width: 80%;
     max-width: 600px;
     background-color: white;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: auto;
 }
 
-.event-form label {
-    display: block;
-    margin-bottom: 10px;
+.judge-form h1 {
+    text-align: center;
     color: #333; /* Dark gray color */
 }
 
-.event-form input[type="text"],
-.event-form input[type="date"],
-.event-form select,
-.event-form input[type="file"] {
+.judge-form img {
     width: 100%;
-    padding: 8px;
+    height: auto;
     margin-bottom: 20px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-sizing: border-box; /* So that padding doesn't increase the width */
 }
 
-.event-form button {
+.back-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
+
+.judge-form form {
+    display: grid;
+    gap: 20px;
+}
+
+.judge-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.judge-form input[type="radio"] {
+    margin-right: 10px;
+}
+
+.judge-form button[type="submit"] {
     background-color: #28a745;
     color: white;
     border: none;
@@ -44,6 +64,6 @@
     width: 100%;
 }
 
-.event-form button:hover {
+.judge-form button[type="submit"]:hover {
     background-color: #218838;
 }
