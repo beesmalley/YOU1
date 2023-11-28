@@ -5,13 +5,13 @@ import Cookies from 'js-cookie';
 const UserDashboard = () => {
   const [userType, setUserType] = useState('');
   const [events, setEvents] = useState([]);
-  const [posters, setPosters] = useState([]);
+  const [postersToJudge, setPostersToJudge] = useState([]);
 
   useEffect(() => {
     setUserType(Cookies.get('accountType'));
     fetchEvents();
     if (userType === 'Judge') {
-        fetchPosters(); //fetch posters to vote if user is a Judge
+        fetchAssignedPosters(); //fetch posters to vote if user is a Judge
     }
   }, [userType]);
 
@@ -28,19 +28,23 @@ const UserDashboard = () => {
     }
   };
 
-  const fetchPosters = async () => {
-    // Placeholder for fetching posters data
-    // ***** Replace '/path/to/posters.php' with actual PHP endpoint *****
+  const fetchAssignedPosters = async () => {
     try {
-      const response = await fetch('/path/to/posters.php');
+      const judgeId = Cookies.get('userId'); // 
+      const response = await fetch(`./posterJudging.php?judgeId=${judgeId}`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
-      setPosters(data);
+      setPostersToJudge(data[judgeId] || []);
     } catch (error) {
-      console.error('Fetching posters failed:', error);
+      console.error('Fetching assigned posters failed:', error);
     }
+  };
+
+  // Function to call after a review is submitted
+  const onReviewSubmit = (posterId) => {
+    setPostersToJudge(prev => prev.filter(poster => poster.ID !== posterId));
   };
 
   const renderEventsList = () => (
@@ -56,9 +60,15 @@ const UserDashboard = () => {
 
   const renderPostersList = () => (
     <ul>
-      {posters.map(poster => (
+      {postersToJudge.map(poster => (
         <li key={poster.ID}>
-          <Link to={`/judgeForm/${poster.ID}`}>{poster.Title}</Link>
+          {/* Link to JudgeForm with onReviewSubmit callback */}
+          <Link to={{
+            pathname: `./judgeForm/${poster.ID}`,
+            state: { onReviewSubmit }
+          }}>
+            {poster.Title}
+          </Link>
         </li>
       ))}
     </ul>
