@@ -44,7 +44,7 @@ const handleFileChange = (e) => {
 return (
   <form onSubmit={handleSubmit}>
     {/* Existing form fields */}
-    <div className='eventform'>
+    <div className='event-form'>
     <label htmlFor="name">Event Name:</label>
       <input
         type="text"

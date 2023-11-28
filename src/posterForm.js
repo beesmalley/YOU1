@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import useHistory from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import './posterForm.css'
 
 const PosterUploadForm = () => {
@@ -10,7 +10,7 @@ const PosterUploadForm = () => {
     const [posterImage, setPosterImage] = useState(null);
     const [description, setDescription] = useState('');
 
-    const history = useHistory();
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -45,7 +45,7 @@ const PosterUploadForm = () => {
 
     const handleBack = () => {
         if (window.confirm('Are you sure you want to go back? Any unsaved changes will be lost.')) {
-            history.goBack(); // Go back to the previous page
+            navigate(-1); // Go back to the previous page
         }
     };
 

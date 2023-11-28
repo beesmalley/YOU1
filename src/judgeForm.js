@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useLocation, useHistory } from 'react-router-dom';
-import './login.css';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
+
 
 function JudgeForm() {
     const { posterId } = useParams(); //retrieve poster ID from URL
     const location = useLocation();
-    const history = useHistory();
+    const navigate = useNavigate();
     const onReviewSubmit = location.state?.onReviewSubmit;
 
     //define questions for judges in array form
@@ -70,7 +70,7 @@ function JudgeForm() {
             }
             console.log('Responses submitted successfully');
             //redirect back to the dashboard
-            history.push('/userDashboard');
+            navigate.push('/userDashboard');
         } catch (error) {
             console.error('Error submitting responses:', error);
         }
@@ -78,7 +78,7 @@ function JudgeForm() {
 
     //function to handle the back button click
     const handleBack = () => {
-      history.goBack(); // Go back to the previous page
+      navigate(-1); // Go back to the previous page
     };
 
     return (
