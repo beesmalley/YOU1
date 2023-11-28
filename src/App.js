@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Home';
 import Sidebar from './sidebar';
 import UserDashboard from './userDashboard';
@@ -19,15 +19,11 @@ function App() {
 
         {/* Main Content */}
         <main className="content">
-          <Switch>
-            <Route exact path="/">
-              <Home />
-            </Route>
-            <Route path="/user-dashboard">
-              <UserDashboard />
-            </Route>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/user-dashboard" element={<UserDashboard />} />
             {/* Add other routes as needed */}
-          </Switch>
+          </Routes>
         </main>
 
         {/* Footer */}
