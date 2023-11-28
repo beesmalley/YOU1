@@ -12,10 +12,13 @@ const UserDashboard = () => {
   useEffect(() => {
     setUserType(Cookies.get('accountType'));
     fetchEvents();
+    fetchPosters();
     if (userType === 'Judge') {
       fetchEventsFollowedByJudge();
       fetchAssignedPosters();
-    } else {
+    } else if(userType === 'Presenter'){
+      fetchPosters();
+    }else {
       //TODO: Add function here for fetchEventsFollowedByPresenter
       fetchEvents(); //Fetch all events for Presenter and Admin
     }
@@ -33,6 +36,20 @@ const UserDashboard = () => {
       console.error('Fetching events failed:', error);
     }
   };
+
+  const fetchPosters = async () => {
+    try {
+      const response = await fetch('GSUPoster/php/fetchposters.php');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      setMyPosters(data);
+    } catch (error) {
+      console.error('Fetching MyPosters failed:', error);
+    }
+  };
+
 
   const fetchEventsFollowedByJudge = async () => {
     const judgeId = Cookies.get('userId'); 
@@ -135,6 +152,7 @@ const UserDashboard = () => {
   );
 
   const renderMyPosters = () => {
+    const userId = Cookies.get('userID'); 
     if (myPosters.length === 0) {
       return <p>No posters uploaded yet.</p>;
     }
@@ -142,8 +160,13 @@ const UserDashboard = () => {
       <ul>
         {myPosters.map(poster => (
           <li key={poster.ID}>
-            <h3>{poster.Title}</h3>
-            <p>{poster.Description}</p>
+            <h3>{poster.title}</h3>
+            <p>{poster.description}</p>
+            {poster.image ? (
+            <img src={`data:image/jpeg;base64,${poster.image}`} alt={poster.title} />
+          ) : (
+            <p>No image available</p>
+          )}
             {/* Add delete button here */}
             <button onClick={() => deletePoster(poster.ID)}>Delete Poster</button>
           </li>

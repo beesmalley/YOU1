@@ -15,7 +15,7 @@ const PosterUploadForm = () => {
 
     useEffect(() => {
         // Fetch events from the backend
-        fetch('GSUPoster/php/eventhandling.php')
+        fetch('GSUPoster/php/geteventname.php')
             .then(response => response.json())
             .then(data => setEvents(data))
             .catch(error => console.error('Error:', error));
@@ -32,11 +32,11 @@ const PosterUploadForm = () => {
         formData.append('description', description);
 
         try {
-            const response = await fetch('./posterInfo.php', {
+            const response = await fetch('GSUPoster/php/addposter.php', {
                 method: 'POST',
                 body: formData
             });
-            const result = await response.json();
+            const result = await response.text();
             console.log('Success:', result);
         } catch (error) {
             console.error('Error:', error);
