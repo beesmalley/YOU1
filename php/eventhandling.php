@@ -23,7 +23,7 @@ if ($table_exists_result->num_rows == 0) {
                             ID INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
                             Name VARCHAR(100) NOT NULL,
                             Description TEXT,
-                            Thumbnail VARCHAR(255),
+                            Thumbnail MEDIUMBLOB,
                             Posted_Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                         )";
 

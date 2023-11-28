@@ -202,10 +202,7 @@ function AuthForm() {
        <nav>
          <ul>
            <li><a href="index.html">Home</a></li>
-           {accountType === 'Admin' && (
-             <li><a href="/admin">Admin Dashboard</a></li>
-           )}
-           {(accountType === 'Presenter' || accountType === 'Judge') && (
+           {(accountType === 'Presenter' || accountType === 'Judge' || accountType === 'Admin') && (
              <li><Link to="./userDashboard">User Dashboard</Link></li>
            )}
            <li><a href="/about">About</a></li>

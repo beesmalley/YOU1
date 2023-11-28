@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Home';
 import Sidebar from './sidebar';
 import UserDashboard from './userDashboard';
+import EventForm from './eventForm';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/userDashboard" element={<UserDashboard />} />
+              <Route path="/eventForm" element={<EventForm/>} />
               {/* Add other routes as needed */}
             </Routes>
           </main>
