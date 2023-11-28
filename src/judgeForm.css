@@ -1,0 +1,69 @@
+.judge-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f0f0f0; /* Light gray background */
+}
+
+.judge-form {
+    width: 80%;
+    max-width: 600px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.judge-form h1 {
+    text-align: center;
+    color: #333; /* Dark gray color */
+}
+
+.judge-form img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.back-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.back-button:hover {
+    background-color: #0056b3;
+}
+
+.judge-form form {
+    display: grid;
+    gap: 20px;
+}
+
+.judge-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.judge-form input[type="radio"] {
+    margin-right: 10px;
+}
+
+.judge-form button[type="submit"] {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.judge-form button[type="submit"]:hover {
+    background-color: #218838;
+}
