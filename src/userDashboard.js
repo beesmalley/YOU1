@@ -68,7 +68,7 @@ const UserDashboard = () => {
   const fetchEventsFollowedByJudge = async () => {
     const judgeId = Cookies.get('userId'); 
     try {
-      const response = await fetch(`./posterJudging.php?judgeId=${judgeId}&fetchEvents=true`);
+      const response = await fetch(`GSUPoster/php/posterJudging.php?judgeId=${judgeId}&fetchEvents=true`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -82,7 +82,7 @@ const UserDashboard = () => {
   const fetchAssignedPosters = async () => {
     const judgeId = Cookies.get('userId'); 
     try {
-      const response = await fetch(`./posterJudging.php?judgeId=${judgeId}`);
+      const response = await fetch(`GSUPoster/php/posterJudging.php?judgeId=${judgeId}`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -214,6 +214,7 @@ const UserDashboard = () => {
     <div>
       <h2>My Events</h2>
       {renderJudgeEventsList()}
+      {renderEventsList()}
       <h2>Posters to Judge</h2>
       {renderPostersList()}
     </div>
