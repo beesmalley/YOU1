@@ -5,13 +5,18 @@ import Cookies from 'js-cookie';
 const UserDashboard = () => {
   const [userType, setUserType] = useState('');
   const [events, setEvents] = useState([]);
+  const [judgeEvents, setJudgeEvents] = useState([]);
   const [postersToJudge, setPostersToJudge] = useState([]);
 
   useEffect(() => {
     setUserType(Cookies.get('accountType'));
     fetchEvents();
     if (userType === 'Judge') {
-        fetchFollowedEventsAndAssignPosters();
+      fetchEventsFollowedByJudge();
+      fetchAssignedPosters();
+    } else {
+      //TODO: Add function here for fetchEventsFollowedByPresenter
+      fetchEvents(); //Fetch all events for Presenter and Admin
     }
   }, [userType]);
 
@@ -28,26 +33,31 @@ const UserDashboard = () => {
     }
   };
 
-  const fetchFollowedEventsAndAssignPosters = async () => {
-    const judgeId = Cookies.get('userId');
+  const fetchEventsFollowedByJudge = async () => {
+    const judgeId = Cookies.get('userId'); 
     try {
-      //fetch events followed by the judge
-      const eventsResponse = await fetch(`./eventsFollowed.php?judgeId=${judgeId}`);
-      if (!eventsResponse.ok) {
-        throw new Error(`HTTP error! status: ${eventsResponse.status}`);
+      const response = await fetch(`./posterJudging.php?judgeId=${judgeId}&fetchEvents=true`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-      const followedEvents = await eventsResponse.json();
-      const eventIds = followedEvents.map(event => event.ID).join(',');
-
-      //fetch posters for these events
-      const postersResponse = await fetch(`./posterJudging.php?judgeId=${judgeId}&eventIds=${eventIds}`);
-      if (!postersResponse.ok) {
-        throw new Error(`HTTP error! status: ${postersResponse.status}`);
-      }
-      const postersData = await postersResponse.json();
-      setPostersToJudge(postersData[judgeId] || []);
+      const data = await response.json();
+      setJudgeEvents(data || []);
     } catch (error) {
-      console.error('Error in fetching events or posters:', error);
+      console.error('Fetching events followed by judge failed:', error);
+    }
+  };
+
+  const fetchAssignedPosters = async () => {
+    const judgeId = Cookies.get('userId'); 
+    try {
+      const response = await fetch(`./posterJudging.php?judgeId=${judgeId}`);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      setPostersToJudge(data || []);
+    } catch (error) {
+      console.error('Fetching assigned posters failed:', error);
     }
   };
 
@@ -56,6 +66,7 @@ const UserDashboard = () => {
     setPostersToJudge(prev => prev.filter(poster => poster.ID !== posterId));
   };
 
+  //TODO: create render events list for Presenter user type
   const renderEventsList = () => (
     <ul>
       {events.map(event => (
@@ -66,6 +77,22 @@ const UserDashboard = () => {
       ))}
     </ul>
   );
+
+  const renderJudgeEventsList = () => {
+    if (judgeEvents.length === 0) {
+      return <p>Visit the home page to explore and follow events!</p>;
+    }
+    return (
+      <ul>
+        {judgeEvents.map(event => (
+          <li key={event.ID}>
+            <h3>{event.Name}</h3>
+            <p>{event.Description}</p>
+          </li>
+        ))}
+      </ul>
+    );
+  };
 
   const renderPostersList = () => (
     <ul>
@@ -94,15 +121,16 @@ const UserDashboard = () => {
   const renderJudgeDashboard = () => (
     <div>
       <h2>My Events</h2>
-      {renderEventsList()}
+      {renderJudgeEventsList()}
       <h2>Posters to Judge</h2>
       {renderPostersList()}
     </div>
   );
 
+  //admins see ALL events on their dashboard
   const renderAdminDashboard = () => (
     <div>
-      <h2>My Events</h2>
+      <h2>Events</h2>
       {renderEventsList()}
       <Link to="/eventForm">Create Event</Link>
     </div>
