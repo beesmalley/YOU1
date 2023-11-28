@@ -86,18 +86,20 @@ const UserDashboard = () => {
 
   // Function to delete a poster
   const deletePoster = async (posterId) => {
+
+    const formData = new FormData();
+    formData.append('posterId',posterId)
     try {
-      const response = await fetch('./posterInfo.php', {
+      const response = await fetch('GSUPoster/php/deleteposter.php', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'delete', posterId })
+        body: formData
       });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const result = await response.json();
+      const result = await response.text();
       console.log('Delete Success:', result);
 
       // Update the myPosters state to remove the deleted poster
