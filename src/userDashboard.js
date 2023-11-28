@@ -11,7 +11,7 @@ const UserDashboard = () => {
     setUserType(Cookies.get('accountType'));
     fetchEvents();
     if (userType === 'Judge') {
-        fetchAssignedPosters(); //fetch posters to vote if user is a Judge
+        fetchFollowedEventsAndAssignPosters();
     }
   }, [userType]);
 
@@ -28,21 +28,30 @@ const UserDashboard = () => {
     }
   };
 
-  const fetchAssignedPosters = async () => {
+  const fetchFollowedEventsAndAssignPosters = async () => {
+    const judgeId = Cookies.get('userId');
     try {
-      const judgeId = Cookies.get('userId'); // 
-      const response = await fetch(`./posterJudging.php?judgeId=${judgeId}`);
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+      //fetch events followed by the judge
+      const eventsResponse = await fetch(`./eventsFollowed.php?judgeId=${judgeId}`);
+      if (!eventsResponse.ok) {
+        throw new Error(`HTTP error! status: ${eventsResponse.status}`);
       }
-      const data = await response.json();
-      setPostersToJudge(data[judgeId] || []);
+      const followedEvents = await eventsResponse.json();
+      const eventIds = followedEvents.map(event => event.ID).join(',');
+
+      //fetch posters for these events
+      const postersResponse = await fetch(`./posterJudging.php?judgeId=${judgeId}&eventIds=${eventIds}`);
+      if (!postersResponse.ok) {
+        throw new Error(`HTTP error! status: ${postersResponse.status}`);
+      }
+      const postersData = await postersResponse.json();
+      setPostersToJudge(postersData[judgeId] || []);
     } catch (error) {
-      console.error('Fetching assigned posters failed:', error);
+      console.error('Error in fetching events or posters:', error);
     }
   };
 
-  // Function to call after a review is submitted
+  //function to call after a review is submitted
   const onReviewSubmit = (posterId) => {
     setPostersToJudge(prev => prev.filter(poster => poster.ID !== posterId));
   };
