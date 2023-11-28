@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Cookies from 'js-cookie'; 
 
 const UserDashboard = () => {
@@ -57,7 +58,7 @@ const UserDashboard = () => {
     <ul>
       {posters.map(poster => (
         <li key={poster.ID}>
-          <a href={`./judgeForm/${poster.ID}`}>{poster.Title}</a>
+          <Link to={`/judgeForm/${poster.ID}`}>{poster.Title}</Link>
         </li>
       ))}
     </ul>
@@ -67,7 +68,7 @@ const UserDashboard = () => {
     <div>
       <h2>My Events</h2>
       {renderEventsList()}
-      <a href="./posterForm">Upload Poster</a>
+      <Link to="/posterForm">Upload Poster</Link>
     </div>
   );
 
