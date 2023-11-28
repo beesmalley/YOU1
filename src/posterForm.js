@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import useHistory from 'react-router-dom';
-import './posterUploadForm.css'
+import './posterForm.css'
 
 const PosterUploadForm = () => {
     const [events, setEvents] = useState([]);
