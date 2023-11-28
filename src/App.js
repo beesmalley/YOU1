@@ -14,17 +14,20 @@ function App() {
           <h1>GSU Poster Voting</h1>
         </header>
 
-        {/* Sidebar */}
-        <Sidebar />
+        {/* Main Wrapper for Sidebar and Content */}
+        <div className="main-wrapper">
+          {/* Main Content */}
+          <main className="content">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/user-dashboard" element={<UserDashboard />} />
+              {/* Add other routes as needed */}
+            </Routes>
+          </main>
 
-        {/* Main Content */}
-        <main className="content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/user-dashboard" element={<UserDashboard />} />
-            {/* Add other routes as needed */}
-          </Routes>
-        </main>
+          {/* Sidebar */}
+          <Sidebar />
+        </div>
 
         {/* Footer */}
         {/* ... Footer code ... */}
